@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="todoInput" placeholder="Enter a new task">
+    <button onclick="addTodo()">Add Task</button>
+    <ul id="todoList">
+        <!-- TODO items will be added here -->
+    </ul>
+
+    <script>
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const todoText = input.value.trim();
+            const todoList = document.getElementById('todoList');
+
+            // Check if the input is empty
+            if (todoText === '') {
+                alert('Please enter a task!');
+                return;
+            }
+
+            // Create a new list item
+            const listItem = document.createElement('li');
+
+            // Add the TODO text
+            listItem.textContent = todoText;
+
+            // Create a remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.className = 'remove-btn';
+            removeBtn.onclick = function() {
+                todoList.removeChild(listItem);
+            };
+
+            // Append the button to the list item
+            listItem.appendChild(removeBtn);
+
+            // Add the new list item to the list
+            todoList.appendChild(listItem);
+
+            // Clear the input field
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
